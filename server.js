@@ -66,6 +66,8 @@ app.post('/', function(req, res, next) {
   
   // Create functions to handle intents here
   function welcome(assistant) {
+    // currently unused - returns single answer without dialog
+    // eventually, this will welcome users and have a dialog
     console.log('Handling action: ' + WELCOME_ACTION);
     assistant.tell('Hello, welcome to is school open');
   }
@@ -74,8 +76,10 @@ app.post('/', function(req, res, next) {
   // Looks up school status
     console.log('Handling action: ' + CHECKSCHOOL_ACTION);
     //assistant.tell('Checking on your school ...');
-    let schoolname="Sainte-Anne";  // TODO: make this a parameter
+    // TODO: make schoolname a parameter
+    let schoolname="Sainte-Anne";
     let schoolRequestURL = "http://francophonesud.nbed.nb.ca/retards/";
+    // dont forget to add cheerio to package.json!!!
     let cheerio = require('cheerio');
     request(schoolRequestURL, function(error, response) {
       if(error) {
@@ -83,17 +87,25 @@ app.post('/', function(req, res, next) {
       } else {
         // Setup $ with cheerio for javascript DOM like queries
         let $ = cheerio.load(response.body);
+       
         // Locate the TD element containing the schoolname and grab the text in the next TD
         let schoolstatus_fr = $("td").filter(function() {
           return $(this).text() == schoolname;
         }).next().text()
-        // TODO: results are currently in french, make a lookup or call translate for english
+        
         // TODO: handle a failed lookup of the school name
         // TODO: also parse out the last update time of page giving status and include "as of $time" in the response
+
+        // results are currently in french, make a lookup for english
+        var schoolstatus = {
+          "Ouverte":"Open",
+          "Ferme":"Closed"
+        }
+
         // Send results to console
         logObject('School URL call response: ', schoolstatus_fr);
         // Send results to Google DialogFlow calling us
-        assistant.tell("Your school is " + schoolstatus_fr + " today");
+        assistant.tell("Your school is " + schoolstatus[schoolstatus_fr] + " today");
       }
     }
            )

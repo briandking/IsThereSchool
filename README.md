@@ -1,29 +1,35 @@
-# Actions on Google API.AI Boilerplate
+# Is There School
+(based on - Actions on Google API.AI Boilerplate)
+
 
 <a href="https://glitch.com/~actions-on-google-api-ai-boilerplate">
   <img src="https://cdn.rawgit.com/j-f1/nails-example/f97c8590/glitch-badge.svg" alt="Remix on Glitch">
 </a>
 
-This project is a boilerplate to help get you started building your own [Actions on Google](https://developers.google.com/actions/) for the Google Assistant that work with API.ai. This code will act as the [webhook fulfillment](https://docs.api.ai/docs/webhook) endpoint. Updates to your code will instantly deploy and update live. Click the Show button to see your live endpoint URL.
+This code will act as the [webhook fulfillment](https://docs.api.ai/docs/webhook) endpoint for a [DialogFlow](https://console.dialogflow.com) 
 
-![demo](https://cdn.glitch.com/216ad9f8-8b2b-4a63-b11a-675087c02c37%2Fdemo.gif?1495739346963)
+Currently this project will return the status (open or closed) for a single school, to Google Home if you say *"ok google ask Is There School"* it will return "open" or "closed"
 
-You can [view a subtitled video walkthrough of this project from SXSW 2017 on YouTube](https://youtu.be/qCY0cG9R3H4), or read a transcript on The Voxable Voice.
+It could be expanded to take parameters like the school name and location.
+It would need a lookup table for each school to find a URL and a function that could be used against that URL to return the data element giving the schools status. E.g.
 
-<a href="https://www.youtube.com/watch?v=qCY0cG9R3H4" title="Video walkthrough">
-  <img src="https://cdn.glitch.com/216ad9f8-8b2b-4a63-b11a-675087c02c37%2Fvideo-thumbnail.png?149569507521" alt="walkthrough video thumbnail">
-</a>
+<table>
+<tr><td>Location1</td><td>School1</td><td>https://url1/page1.html</td><td> get_status_location1_school(school1)</td></tr>
+<tr><td>Location1</td><td>School2</td><td>https://url1/page1.html</td><td>get_status_location1_school(school2)</td></tr>
+<tr><td>Location2</td><td>School1</td><td>https://url2/page2.html</td><td>get_status_location2_school(school1)</td></tr>
+</table>
 
-Glitch is a developer playground that lets you code a real web-app without the slow setup and deployment steps. You can use Glitch to build an API backend that fulfills webhook requests from API.ai by providing a response for the Assistant to read to the user.
+[Work Flow](https://drive.google.com/file/d/1nB9Ej2tU7lEbJvR39t49EQjLhnO6b0tg/view?usp=sharing)
 
 [About Glitch](https://glitch.com/about)
 
-## Your Project
+## Project
 
 On the back-end,
-- your app starts at `server.js`
-- add frameworks and packages in `package.json`
+- The app starts at `server.js`
+- frameworks and packages in `package.json`
 - safely store app secrets in `.env`
+- safely store data secrets in `.data`
 
 On the front-end,
 - edit `client.js`, `style.css` and `index.html`
@@ -37,11 +43,9 @@ On the front-end,
 
 ## Contributing
 
-If you're viewing this project on Glitch, you can submit contributions on [the boilerplate's GitHub repo](https://github.com/voxable-labs/actions-on-google-api-ai-boilerplate).
-
 ## Credits
 
-This boilerplate project was made by [Voxable](https://voxable.io), a boutique conversational interface agency in Austin, Texas. It's based [on another Glitch boilerplate provided by the Glitch team](https://glitch.com/~google-home). 
+This project was made by possible by the [boilerplate](https://glitch.com/~actions-on-google-api-ai-boilerplate) project from [Voxable](https://voxable.io), a boutique conversational interface agency in Austin, Texas. It's based [on another Glitch boilerplate provided by the Glitch team](https://glitch.com/~google-home). 
 
 Voxable builds chatbots, voice interface, Alexa skills, and Google Assistant apps for products and clients. Voxable's goal is to help humans and machines better understand each other.
 
